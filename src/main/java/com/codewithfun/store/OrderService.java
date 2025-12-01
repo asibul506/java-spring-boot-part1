@@ -13,7 +13,7 @@ public class OrderService {
     // otherwise there will be an error. But as long as the class
     // has only one constructor this annotation is optional
     //@Autowired
-    public OrderService(@Qualifier("paypal") PaymentService paymentService) { //this qualifier let us choosing a different bean rather than primary
+    public OrderService(@Qualifier("stripe") PaymentService paymentService) { //this qualifier let us choosing a different bean rather than primary
         this.paymentService = paymentService;
     }
 

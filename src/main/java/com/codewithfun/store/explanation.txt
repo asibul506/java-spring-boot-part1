@@ -1,3 +1,9 @@
 Controlling Bean Selections
     @Primary - to set one bean as primary when we have multiple beans
     @Qualifier - specifying a specific bean
+
+
+Externalizing configurations (Application.properties):
+    This part explains how to get the value from Application.properties
+    in order to access any parameter from the Application.properties we need to use
+    the @Value("${parameterName}") annotation.
