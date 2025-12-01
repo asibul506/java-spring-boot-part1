@@ -16,7 +16,7 @@ public class StripePaymentService implements PaymentService {
     @Value("${stripe.enable}")
     private boolean stripeEnabled;
 
-    @Value("${stripe.timeout}")
+    @Value("${stripe.timeout:3000}")
     private Double timeOut;
 
     @Value("${stripe.supportedCurrencies}")

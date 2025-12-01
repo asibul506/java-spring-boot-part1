@@ -3,7 +3,17 @@ Controlling Bean Selections
     @Qualifier - specifying a specific bean
 
 
-Externalizing configurations (Application.properties):
-    This part explains how to get the value from Application.properties
-    in order to access any parameter from the Application.properties we need to use
+Externalizing configurations (application.properties):
+    This part explains how to get the value from application.properties
+    in order to access any parameter from the application.properties we need to use
     the @Value("${parameterName}") annotation.
+
+    #   we can also set a default value to a parameter even if they are not declare on
+        the application.properties
+
+            @Value("${stripe.timeout:3000}")
+            private Double timeOut;
+
+        Here if there is no such property declared as stripe.timeout; the system will work
+        with the default one. But if there is one, spring boot will overwrite that onw
+        with the default one.
