@@ -1,0 +1,3 @@
+Controlling Bean Selections
+    @Primary - to set one bean as primary when we have multiple beans
+    @Qualifier - specifying a specific bean

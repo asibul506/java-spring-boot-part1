@@ -2,7 +2,7 @@ package com.codewithfun.store;
 
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("paypal")
 public class PaypalPaymentService implements PaymentService {
 
     @Override
