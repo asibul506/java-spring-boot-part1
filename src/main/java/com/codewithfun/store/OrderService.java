@@ -1,6 +1,7 @@
 package com.codewithfun.store;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ public class OrderService {
     // otherwise there will be an error. But as long as the class
     // has only one constructor this annotation is optional
     //@Autowired
-    public OrderService(PaymentService paymentService) {
+    public OrderService(@Qualifier("paypal") PaymentService paymentService) { //this qualifier let us choosing a different bean rather than primary
         this.paymentService = paymentService;
     }
 
