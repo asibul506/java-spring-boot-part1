@@ -47,3 +47,14 @@ Bean Lifecycle Hooks:
     and dependencies are injected.
     @PreDestroy - to define a method that should be executed before the bean is destroyed.
     These annotations are useful for performing initialization and cleanup tasks for beans.
+
+
+Database migration with Flyway:
+    Flyway is a database migration tool that helps manage and version control database
+    schema changes.
+    To use Flyway in a Spring Boot application, you typically include the Flyway dependency
+    in your project and configure the database connection properties in the application.properties
+    or application.yaml file. Flyway will then automatically apply any pending migrations
+    when the application starts. It look for the migration files in the default location
+    "db/migration" under the resources folder. and the migration files should follow a specific
+    naming convention, such as V1__Initial_setup.sql, V2__Add_new_table
