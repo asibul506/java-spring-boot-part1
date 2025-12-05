@@ -9,3 +9,7 @@ stripe:
   enable: true
   timeout: 2000
   supported-currencies: USD, BDT, EURO
+
+mail:
+  host: https://smtp.gmail.com
+  port: 5761
