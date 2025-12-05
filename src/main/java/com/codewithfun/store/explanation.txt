@@ -41,3 +41,9 @@ Bean Scopes:
     Session - a new instance of the bean is created for each HTTP session (web applications).
     Application - a single instance of the bean is created for the lifecycle of a ServletContext
     (web applications).
+
+Bean Lifecycle Hooks:
+    @PostConstruct - to define a method that should be executed after the bean is created
+    and dependencies are injected.
+    @PreDestroy - to define a method that should be executed before the bean is destroyed.
+    These annotations are useful for performing initialization and cleanup tasks for beans.
