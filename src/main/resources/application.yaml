@@ -2,7 +2,7 @@ spring:
   application:
     name: store
 
-payment-type: paypal
+payment-type: stripe
 
 stripe:
   apiUrl: "www.stripe.com"

@@ -21,3 +21,12 @@ Externalizing configurations (application.properties):
 Externalizing configurations (application.yaml):
     both .yaml and .properties are configuration files and both can exist individually. But
     it's better to follow only one configuration file so I am deleting application.properties file
+
+
+Lazy initialization:
+    @Lazy - to delay the initialization of a bean until it is needed.
+    This is useful for improving startup time and reducing memory consumption.
+    By default, Spring initializes all singleton beans at startup. However, by using
+    the @Lazy annotation, you can specify that a bean should be created only when it is
+    first requested. If we want to create bean from the using code like AppConfig class
+    we can use @Lazy annotation on the method that creates the bean.
