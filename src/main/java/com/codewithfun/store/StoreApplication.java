@@ -11,11 +11,10 @@ public class StoreApplication {
         ApplicationContext context = SpringApplication.run(StoreApplication.class, args);
 
         var orderService = context.getBean(OrderService.class);
+        var orderService2 = context.getBean(OrderService.class);
         orderService.placeOrder();
 
-        var resource = context.getBean(HeavyResource.class);
-//        orderService = new OrderService(new PaypalPaymentService());
-//        orderService.placeOrder();
+
 
     }
 

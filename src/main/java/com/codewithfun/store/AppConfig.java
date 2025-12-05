@@ -3,6 +3,7 @@ package com.codewithfun.store;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
 @Configuration //tells spring that this class is a source of bean definitions
 public class AppConfig {
@@ -28,6 +29,7 @@ public class AppConfig {
     }
 
     @Bean
+    @Scope("prototype")
     public OrderService orderService() {
         return new OrderService(paymentService());
     }

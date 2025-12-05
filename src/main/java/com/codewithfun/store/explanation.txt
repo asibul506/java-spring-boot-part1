@@ -30,3 +30,14 @@ Lazy initialization:
     the @Lazy annotation, you can specify that a bean should be created only when it is
     first requested. If we want to create bean from the using code like AppConfig class
     we can use @Lazy annotation on the method that creates the bean.
+
+
+Bean Scopes:
+    It determines the lifecycle and visibility of a bean in the Spring container.
+    The most common scopes are:
+    Singleton - only one instance of the bean is created and shared across the application.
+    Prototype - a new instance of the bean is created each time it is requested.
+    Request - a new instance of the bean is created for each HTTP request (web applications).
+    Session - a new instance of the bean is created for each HTTP session (web applications).
+    Application - a single instance of the bean is created for the lifecycle of a ServletContext
+    (web applications).
