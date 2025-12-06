@@ -5,6 +5,10 @@ import lombok.*;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Entity
 @Table(name = "addresses")
 public class Address {
@@ -12,7 +16,7 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @Column(name = "street")
     private String street;
@@ -24,8 +28,10 @@ public class Address {
     private String state;
 
     @Column(name = "zip")
-    private String zipCode;
+    private String zip;
 
-    @Column(name = "user_id")
-    private long userId;
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    @ToString.Exclude
+    private User user;
 }

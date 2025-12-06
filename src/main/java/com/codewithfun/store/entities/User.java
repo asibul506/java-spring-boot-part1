@@ -3,6 +3,9 @@ package com.codewithfun.store.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Setter // This annotation is from Lombok library and it generates setter methods for all fields in the class
 @Getter // This annotation is from Lombok library and it generates getter methods for all fields in the class
 @AllArgsConstructor // This annotation is from Lombok library and it generates a constructor with parameters for all fields in the class. to use this annotation we need a NoArgsConstructor annotation as well or a default constructor
@@ -31,5 +34,20 @@ public class User {
 
     @Column(nullable = false, name = "password")
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    @Builder.Default
+    private List<Address> addresses = new ArrayList<>();
+
+
+    public void addAddress(Address address) {
+        addresses.add(address);
+        address.setUser(this);
+    }
+
+    public void removeAddress(Address address) {
+        addresses.remove(address);
+        address.setUser(null);
+    }
 
 }

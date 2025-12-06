@@ -58,3 +58,44 @@ Database migration with Flyway:
     when the application starts. It look for the migration files in the default location
     "db/migration" under the resources folder. and the migration files should follow a specific
     naming convention, such as V1__Initial_setup.sql, V2__Add_new_table
+
+
+Implementing one-to-many relationship with JPA:
+    In JPA, a one-to-many relationship is established using the @OneToMany and @ManyToOne
+    annotations. The entity that contains the collection of related entities is annotated
+    with @OneToMany, while the entity that is being referenced is annotated with @ManyToOne.
+    For example, consider a scenario where we have two entities: Author and Book. An Author
+    can have multiple Books, but each Book is associated with only one Author.
+
+    In the Author entity, we would define the one-to-many relationship as follows:
+
+        @Entity
+        public class Author {
+            @Id
+            @GeneratedValue(strategy = GenerationType.IDENTITY)
+            private Long id;
+
+            private String name;
+
+            @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+            private List<Book> books;
+
+            // getters and setters
+        }
+
+    In the Book entity, we would define the many-to-one relationship as follows:
+
+        @Entity
+        public class Book {
+            @Id
+            @GeneratedValue(strategy = GenerationType.IDENTITY)
+            private Long id;
+
+            private String title;
+
+            @ManyToOne
+            @JoinColumn(name = "author_id")
+            private Author author;
+
+            // getters and setters
+        }
