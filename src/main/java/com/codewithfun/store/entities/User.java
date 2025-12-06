@@ -15,6 +15,7 @@ public class User {
 
     @Id // This annotation specifies the primary key of an entity
     @GeneratedValue(strategy = GenerationType.IDENTITY)// This annotation provides for the specification of generation strategies for the values of primary keys
+    @Column(name = "id") // This annotation specifies the mapped column for a persistent property or field
     private Long id;
 
 /*
