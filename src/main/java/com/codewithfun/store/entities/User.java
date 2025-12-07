@@ -71,4 +71,12 @@ public class User {
     @OneToOne(mappedBy = "user") // mappedBy attribute indicates that the Profile entity owns the relationship
     private Profile profile;
 
+    @ManyToMany
+    @JoinTable(
+            name="wishlist",
+            joinColumns = @JoinColumn(name="user_id"),
+            inverseJoinColumns = @JoinColumn(name="product_id")
+    )
+    private Set<Product> wishlist = new HashSet<>();
+
 }
