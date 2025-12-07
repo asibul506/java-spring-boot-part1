@@ -6,15 +6,3 @@ spring:
     url: jdbc:mysql://localhost:3306/store?createDatabaseIfNotExist=true
     username: root
     password: Asibul506
-
-payment-type: stripe
-
-stripe:
-  apiUrl: "www.stripe.com"
-  enable: true
-  timeout: 2000
-  supported-currencies: USD, BDT, EURO
-
-mail:
-  host: https://smtp.gmail.com
-  port: 5761
