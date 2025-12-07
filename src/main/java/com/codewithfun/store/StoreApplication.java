@@ -22,15 +22,8 @@ public class StoreApplication {
                         .build();
 
 
+       user.addTag("tag1");
 
-        var address = Address.builder()
-                .street("street")
-                .city("city")
-                .state("state")
-                .zip("zip")
-                .build();
-
-       user.addAddress(address);
        System.out.println(user);
 
     }

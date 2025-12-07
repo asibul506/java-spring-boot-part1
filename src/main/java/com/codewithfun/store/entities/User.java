@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Setter // This annotation is from Lombok library and it generates setter methods for all fields in the class
 @Getter // This annotation is from Lombok library and it generates getter methods for all fields in the class
@@ -48,6 +50,22 @@ public class User {
     public void removeAddress(Address address) {
         addresses.remove(address);
         address.setUser(null);
+    }
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_tags", // Name of the join table
+            joinColumns = @JoinColumn(name = "user_id"), // Foreign key column referencing User entity
+            inverseJoinColumns = @JoinColumn(name = "tag_id") // Foreign key column referencing Tag entity
+    ) // Join table to establish many-to-many relationship between User and Tag
+    @Builder.Default
+    private Set<Tag> tags = new HashSet<>(); //Set to remove duplicate tags
+
+    // Method to add a tag to the user
+    public void addTag(String tagName) {
+        var tag = new Tag(tagName);
+        tags.add(tag);
+        tag.getUsers().add(this);
     }
 
 }

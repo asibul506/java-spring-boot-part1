@@ -30,8 +30,8 @@ public class Address {
     @Column(name = "zip")
     private String zip;
 
-    @ManyToOne
-    @JoinColumn(name="user_id")
-    @ToString.Exclude
+    @ManyToOne// many addresses can belong to one user
+    @JoinColumn(name="user_id") // foreign key column
+    @ToString.Exclude// to avoid circular reference in toString() method
     private User user;
 }
