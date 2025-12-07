@@ -68,4 +68,7 @@ public class User {
         tag.getUsers().add(this);
     }
 
+    @OneToOne(mappedBy = "user") // mappedBy attribute indicates that the Profile entity owns the relationship
+    private Profile profile;
+
 }

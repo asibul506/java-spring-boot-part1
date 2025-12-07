@@ -1,13 +1,14 @@
 package com.codewithfun.store.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Getter
 @Setter
 @Entity
@@ -29,5 +30,12 @@ public class Profile {
 
     @Column(name = "loyalty_points")
     private Integer loyaltyPoints;
+
+
+    @OneToOne
+    @JoinColumn(name = "id") // foreign key column that references the primary key of the User entity
+    @MapsId // This annotation is used to map the primary key of the Profile entity to the primary key of the User entity
+    @ToString.Exclude
+    private User user;
 
 }

@@ -143,3 +143,43 @@ Implementing many-to-many relationship with JPA:
 
             // getters and setters
         }
+
+Implementing One-to-One relationship with JPA:
+    In JPA, a one-to-one relationship is established using the @OneToOne annotation.
+    This relationship indicates that one entity is associated with exactly one instance
+    of another entity. For example, consider a scenario where we have two entities:
+    User and Profile. Each User has one Profile, and each Profile is associated with
+    one User.
+
+    In the User entity, we would define the one-to-one relationship as follows:
+
+        @Entity
+        public class User {
+            @Id
+            @GeneratedValue(strategy = GenerationType.IDENTITY)
+            private Long id;
+
+            private String username;
+
+            @OneToOne()
+            @JoinColumn(name = "profile_id")
+            private Profile profile;
+
+            // getters and setters
+        }
+
+    In the Profile entity, we would define the one-to-one relationship as follows:
+
+        @Entity
+        public class Profile {
+            @Id
+            @GeneratedValue(strategy = GenerationType.IDENTITY)
+            private Long id;
+
+            private String bio;
+
+            @OneToOne(mappedBy = "profile")
+            private User user;
+
+            // getters and setters
+        }
