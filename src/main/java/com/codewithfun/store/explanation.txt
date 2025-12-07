@@ -183,3 +183,17 @@ Implementing One-to-One relationship with JPA:
 
             // getters and setters
         }
+
+Generating Entities using JPA Buddy:
+    JPA Buddy is a powerful IDE plugin that simplifies the process of working with
+    JPA and Hibernate in Java applications. It provides a user-friendly interface
+    for generating JPA entities, repositories, and other related components.
+
+    To generate entities using JPA Buddy, you typically follow these steps:
+    1. Install JPA Buddy plugin in your IDE (e.g., IntelliJ IDEA).
+    2. Open your project and navigate to the JPA Buddy tool window.(rignt click on the folder add new and select JPA Entity from DB)
+    3. Use the JPA Buddy interface to create new entities, define attributes,
+       and establish relationships between entities.
+    4. JPA Buddy will generate the necessary Java classes and annotations based
+       on your specifications.
+    5. Review and customize the generated code as needed for your application.
