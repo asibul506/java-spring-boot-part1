@@ -37,7 +37,7 @@ public class User {
     @Column(nullable = false, name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "user", cascade=CascadeType.PERSIST) // cascade type PERSIST is used to propagate the persist operation to the associated entities
+    @OneToMany(mappedBy = "user", cascade={CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true) // cascade type PERSIST is used to propagate the persist operation to the associated entities
     @Builder.Default
     private List<Address> addresses = new ArrayList<>();
 
@@ -70,7 +70,7 @@ public class User {
 
     //despite of setting the fetch strategy to LAZY on the owner side of the relationship, it is still EAGER by default
     // for OneToOne relationship. Among two options to chang this behavior, we can either comment out or remove this relationship
-    @OneToOne(mappedBy = "user") // mappedBy attribute indicates that the Profile entity owns the relationship
+    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE) // mappedBy attribute indicates that the Profile entity owns the relationship
     private Profile profile;
 
     @ManyToMany
