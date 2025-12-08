@@ -197,3 +197,32 @@ Generating Entities using JPA Buddy:
     4. JPA Buddy will generate the necessary Java classes and annotations based
        on your specifications.
     5. Review and customize the generated code as needed for your application.
+
+
+
+Managing Transactions:
+    In Spring, transactions can be managed using the @Transactional annotation.
+    This annotation can be applied at the class or method level to define the
+    scope of a transaction. When a method annotated with @Transactional is called,
+    Spring will start a new transaction, and if the method completes successfully,
+    the transaction will be committed. If an exception occurs, the transaction
+    will be rolled back.
+
+    For example, consider a service class that performs database operations:
+
+        @Service
+        public class UserService {
+            @Autowired
+            private UserRepository userRepository;
+
+            @Transactional
+            public void createUser(User user) {
+                userRepository.save(user);
+                // additional operations
+            }
+        }
+
+    In this example, the createUser method is annotated with @Transactional,
+    indicating that it should be executed within a transaction. If any exception
+    occurs during the execution of this method, all changes made within the transaction
+    will be rolled back to maintain data integrity.
