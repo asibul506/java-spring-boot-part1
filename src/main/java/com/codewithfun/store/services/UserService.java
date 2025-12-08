@@ -1,6 +1,7 @@
 package com.codewithfun.store.services;
 
 import com.codewithfun.store.entities.User;
+import com.codewithfun.store.repositories.AddressRepository;
 import com.codewithfun.store.repositories.ProfileRepository;
 import com.codewithfun.store.repositories.UserRepository;
 import jakarta.persistence.EntityManager;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 public class UserService {
     private final UserRepository userRepository;
     private final ProfileRepository profileRepository;
+    private final AddressRepository addressRepository;
     private final EntityManager entityManager; // JPA's EntityManager is used to interact with the persistence context.
 
     @Transactional // This annotation is used to specify that the method should be executed within a transaction context.
@@ -48,5 +50,10 @@ public class UserService {
         System.out.println("Profile: " + profile.getId() +"\t"+ profile.getBio());
         System.out.println("Associated User from Profile: " + profile.getUser().getId() +"\t"+ profile.getUser().getName());
 
+    }
+
+    public void showAddresses() {
+        var address = addressRepository.findById(1L).orElseThrow();
+        System.out.println("Address: " + address);
     }
 }

@@ -30,7 +30,7 @@ public class Address {
     @Column(name = "zip")
     private String zip;
 
-    @ManyToOne// many addresses can belong to one user
+    @ManyToOne(fetch = FetchType.LAZY)// many addresses can belong to one user
     @JoinColumn(name="user_id") // foreign key column
     @ToString.Exclude// to avoid circular reference in toString() method
     private User user;
