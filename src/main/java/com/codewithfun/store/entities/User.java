@@ -68,6 +68,8 @@ public class User {
         tag.getUsers().add(this);
     }
 
+    //despite of setting the fetch strategy to LAZY on the owner side of the relationship, it is still EAGER by default
+    // for OneToOne relationship. Among two options to chang this behavior, we can either comment out or remove this relationship
     @OneToOne(mappedBy = "user") // mappedBy attribute indicates that the Profile entity owns the relationship
     private Profile profile;
 

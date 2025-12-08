@@ -226,3 +226,33 @@ Managing Transactions:
     indicating that it should be executed within a transaction. If any exception
     occurs during the execution of this method, all changes made within the transaction
     will be rolled back to maintain data integrity.
+
+Fetching Strategies in JPA:
+    In JPA, fetching strategies determine how related entities are loaded from the database.
+    There are two main fetching strategies: EAGER and LAZY.
+
+    EAGER Fetching:
+        When an association is marked as EAGER, the related entity is loaded immediately
+        along with the parent entity. This means that when you retrieve the parent entity,
+        all its associated entities are also fetched from the database in a single query.
+        EAGER fetching can lead to performance issues if there are many related entities,
+        as it may result in large result sets and increased memory consumption.
+
+    LAZY Fetching:
+        When an association is marked as LAZY, the related entity is not loaded until it
+        is explicitly accessed. This means that when you retrieve the parent entity,
+        the associated entities are not fetched from the database until you try to access
+        them. LAZY fetching can improve performance by reducing the amount of data
+        retrieved from the database, especially when dealing with large collections
+        of related entities. However, it can lead to LazyInitializationException if
+        the associated entities are accessed outside of an active session or transaction.
+
+    By default, @OneToMany and @ManyToMany associations are LAZY, while @ManyToOne
+    and @OneToOne associations are EAGER. However, you can explicitly specify the
+    fetching strategy using the fetch attribute of the association annotations:
+
+        @OneToMany(fetch = FetchType.LAZY)
+        private List<Book> books;
+
+        @ManyToOne(fetch = FetchType.EAGER)
+        private Author author;

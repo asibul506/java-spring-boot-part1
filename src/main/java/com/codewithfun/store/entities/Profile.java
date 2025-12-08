@@ -32,7 +32,7 @@ public class Profile {
     private Integer loyaltyPoints;
 
 
-    @OneToOne
+    @OneToOne(fetch=FetchType.LAZY) // fetch type LAZY is used to load the related entity only when it is accessed for the first time
     @JoinColumn(name = "id") // foreign key column that references the primary key of the User entity
     @MapsId // This annotation is used to map the primary key of the Profile entity to the primary key of the User entity
     @ToString.Exclude
