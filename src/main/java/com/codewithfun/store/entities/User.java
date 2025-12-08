@@ -37,7 +37,7 @@ public class User {
     @Column(nullable = false, name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade=CascadeType.PERSIST) // cascade type PERSIST is used to propagate the persist operation to the associated entities
     @Builder.Default
     private List<Address> addresses = new ArrayList<>();
 

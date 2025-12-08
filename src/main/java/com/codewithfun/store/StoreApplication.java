@@ -13,7 +13,7 @@ public class StoreApplication {
         var service = context.getBean(UserService.class);
 
         //service.showEntityStates();
-        service.showAddresses();
+        service.persistRelated();
 
     }
 

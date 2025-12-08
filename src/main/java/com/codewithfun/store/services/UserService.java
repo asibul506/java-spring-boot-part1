@@ -1,5 +1,6 @@
 package com.codewithfun.store.services;
 
+import com.codewithfun.store.entities.Address;
 import com.codewithfun.store.entities.User;
 import com.codewithfun.store.repositories.AddressRepository;
 import com.codewithfun.store.repositories.ProfileRepository;
@@ -52,8 +53,26 @@ public class UserService {
 
     }
 
-    public void showAddresses() {
+    public void fetchAddress() {
         var address = addressRepository.findById(1L).orElseThrow();
         System.out.println("Address: " + address);
+    }
+
+    public void persistRelated() {
+        var user = User.builder()
+                .name("jon")
+                .email("jon@doe.com")
+                .password("jonpassword")
+                .build();
+
+        var address = Address.builder()
+                .street("123 Main St")
+                .city("Springfield")
+                .state("IL")
+                .zip("62701")
+                .build();
+
+        user.addAddress(address);
+        userRepository.save(user);
     }
 }
