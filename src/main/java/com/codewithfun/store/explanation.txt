@@ -256,3 +256,6 @@ Fetching Strategies in JPA:
 
         @ManyToOne(fetch = FetchType.EAGER)
         private Author author;
+
+
+

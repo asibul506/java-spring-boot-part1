@@ -39,6 +39,7 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade={CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true) // cascade type PERSIST is used to propagate the persist operation to the associated entities
     @Builder.Default
+    @ToString.Exclude
     private List<Address> addresses = new ArrayList<>();
 
 
@@ -59,6 +60,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "tag_id") // Foreign key column referencing Tag entity
     ) // Join table to establish many-to-many relationship between User and Tag
     @Builder.Default
+    @ToString.Exclude
     private Set<Tag> tags = new HashSet<>(); //Set to remove duplicate tags
 
     // Method to add a tag to the user
@@ -79,6 +81,7 @@ public class User {
             joinColumns = @JoinColumn(name="user_id"),
             inverseJoinColumns = @JoinColumn(name="product_id")
     )
+    @ToString.Exclude
     private Set<Product> wishlist = new HashSet<>();
 
 
