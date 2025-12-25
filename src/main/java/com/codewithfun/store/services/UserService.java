@@ -127,4 +127,11 @@ public class UserService {
         productRepository.deleteById(3L);
     }
 
+    @Transactional
+    public void updateProductPrices(){
+        var product = productRepository.findByPriceBetween(BigDecimal.valueOf(1000), BigDecimal.valueOf(2000));
+        //productRepository.updatePriceByCategory(BigDecimal.valueOf(2000), (byte)1);
+        System.out.println(product);
+    }
+
 }

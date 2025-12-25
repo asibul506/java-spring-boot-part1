@@ -17,7 +17,10 @@ public class StoreApplication {
 
 
         //service.addProductToWishlist();
-        service.removeProduct();
+        //service.removeProduct();
+
+        service.updateProductPrices();
+
     }
 
 }
