@@ -14,7 +14,10 @@ public class StoreApplication {
 
         //service.showEntityStates();
         //service.persistRelated();
-        service.deleteRelated();
+
+
+        //service.addProductToWishlist();
+        service.removeProduct();
     }
 
 }
