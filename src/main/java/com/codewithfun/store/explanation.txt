@@ -259,3 +259,46 @@ Fetching Strategies in JPA:
 
 
 
+Projections:
+    Projections in JPA allow you to retrieve a subset of entity attributes
+    instead of the entire entity. This can be useful for optimizing performance
+    and reducing the amount of data transferred from the database.
+
+    There are two main types of projections in JPA: Interface-based projections
+    and Class-based projections.
+
+    Interface-based Projections:
+        In this approach, you define an interface that specifies the attributes
+        you want to retrieve. JPA will then create a proxy implementation of
+        this interface at runtime. For example:
+
+            public interface UserProjection {
+                String getUsername();
+                String getEmail();
+            }
+
+        You can then use this projection in your repository method:
+
+            List<UserProjection> findByActiveTrue();
+
+    Class-based Projections:
+        In this approach, you define a DTO (Data Transfer Object) class that
+        contains the attributes you want to retrieve. You can then use a JPQL
+        query to populate instances of this DTO class. For example:
+
+            public class UserDTO {
+                private String username;
+                private String email;
+
+                public UserDTO(String username, String email) {
+                    this.username = username;
+                    this.email = email;
+                }
+
+                // getters and setters
+            }
+
+        You can then use this DTO in your repository method:
+
+            @Query("SELECT new com.example.UserDTO(u.username, u.email) FROM User u WHERE u.active = true")
+            List<UserDTO> findActiveUsers();

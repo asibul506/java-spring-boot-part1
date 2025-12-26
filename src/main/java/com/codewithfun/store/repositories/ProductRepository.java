@@ -1,5 +1,8 @@
 package com.codewithfun.store.repositories;
 
+import com.codewithfun.store.dtos.ProductSummary;
+import com.codewithfun.store.dtos.ProductSummaryDTO;
+import com.codewithfun.store.entities.Category;
 import com.codewithfun.store.entities.Product;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -30,7 +33,22 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     @Query("update Product p set p.price = :newPrice where p.category.id = :categoryId")
     void updatePriceByCategory(BigDecimal newPrice, Byte categoryId);
 
+    //Projection - selecting specific fields instead of entire entity
+
+    // Using projection interface - way 1
+    List<ProductSummary> findByCategory(Category category);
+
+    // Using projection class - way 2
+    // List<ProductSummaryDTO> findByCategory(Category category);
 
 
+    // Using @Query with projection interface - way 3
+    // @Query("select p.id, p.name from Product p where p.category = :category") //if we select entire p entity, we will encounter eager loading issue along with all fields. So, we use projection interface to select only required fields.
+    // List<ProductSummary> findByCategory(@Param("category") Category category);
+
+    // Using @Query with projection class - way 4
+    // when using Class, we can't use select p.id, p.name directly. We have to use 'new' keyword along with fully qualified class name and constructor parameters.
+    //@Query("select new com.codewithfun.store.dtos.ProductSummaryDTO(p.id, p.name) from Product p where p.category = :category")
+    //List<ProductSummaryDTO> findByCategory(@Param("category") Category category);
 
 }

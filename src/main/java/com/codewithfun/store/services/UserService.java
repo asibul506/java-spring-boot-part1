@@ -134,4 +134,14 @@ public class UserService {
         System.out.println(product);
     }
 
+    public void fetchProducts() {
+//        var category = Category.builder()
+//                .name("Food")
+//                .build();
+//        categoryRepository.save(category);
+
+        var category = categoryRepository.findById((byte)1).orElseThrow();
+        var products = productRepository.findByCategory(category);
+        products.forEach(System.out::println);
+    }
 }
