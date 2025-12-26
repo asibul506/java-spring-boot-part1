@@ -1,6 +1,7 @@
 package com.codewithfun.store.repositories;
 
 import com.codewithfun.store.entities.User;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.repository.CrudRepository;
 
 import java.time.LocalDateTime;
@@ -8,6 +9,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends CrudRepository<User, Long> {
+
+    @EntityGraph(attributePaths = {"addresses", "tags"}) // Eagerly fetch addresses and tags with user entity
+    Optional<User> findByEmail(String email);
 
     // below this line, add various method signatures for Spring Data JPA query generation. when uncommented,
     // these methods will be automatically implemented by Spring Data JPA based on their names.

@@ -302,3 +302,40 @@ Projections:
 
             @Query("SELECT new com.example.UserDTO(u.username, u.email) FROM User u WHERE u.active = true")
             List<UserDTO> findActiveUsers();
+
+EntityGraph Annotation:
+    The @EntityGraph annotation in JPA is used to define a graph of entities
+    that should be fetched together in a single query. This is particularly useful
+    for optimizing performance and avoiding the N+1 select problem when dealing
+    with associations between entities.
+
+    By using @EntityGraph, you can specify which related entities should be
+    eagerly loaded along with the main entity, allowing you to control the
+    fetching behavior more precisely.
+
+    For example, consider two entities: Author and Book, where an Author has
+    a one-to-many relationship with Book. You can define an entity graph
+    to fetch an Author along with their associated Books as follows:
+
+        @Entity
+        @NamedEntityGraph(
+            name = "Author.books",
+            attributeNodes = @NamedAttributeNode("books")
+        )
+        public class Author {
+            @Id
+            @GeneratedValue(strategy = GenerationType.IDENTITY)
+            private Long id;
+
+            private String name;
+
+            @OneToMany(mappedBy = "author")
+            private List<Book> books;
+
+            // getters and setters
+        }
+
+    You can then use this entity graph in your repository method:
+
+        @EntityGraph(value = "Author.books", type = EntityGraph.EntityGraphType.LOAD)
+        Optional<Author> findById(Long id);
