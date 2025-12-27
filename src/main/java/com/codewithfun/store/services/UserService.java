@@ -147,8 +147,12 @@ public class UserService {
 
     @Transactional
     public void fetchUsers(){
-        var user = userRepository.findByEmail("john.doe@example.com").orElseThrow();
-        System.out.println(user.getId());
+        var users = userRepository.findAllWithAddresses(); // Custom query with EntityGraph to eagerly fetch addresses and avoid N+1 problem
+
+        users.forEach(u ->{
+            System.out.println(u);
+            u.getAddresses().forEach(System.out::println);
+        });
 
     }
 

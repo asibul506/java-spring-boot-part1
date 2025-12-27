@@ -339,3 +339,31 @@ EntityGraph Annotation:
 
         @EntityGraph(value = "Author.books", type = EntityGraph.EntityGraphType.LOAD)
         Optional<Author> findById(Long id);
+
+
+N+1 problem:
+    The N+1 problem is a common performance issue that occurs when an application
+    retrieves a collection of entities and then, for each entity in that collection,
+    it performs an additional query to fetch related entities. This results in
+    N+1 queries being executed, where N is the number of entities in the initial
+    collection.
+
+    For example, consider a scenario where you have two entities: Author and Book,
+    with a one-to-many relationship between them (an Author can have multiple Books).
+    If you retrieve a list of Authors and then access their associated Books,
+    you might end up executing one query to fetch the Authors and then N additional
+    queries to fetch the Books for each Author.
+
+    This can lead to significant performance degradation, especially when dealing
+    with large datasets, as the number of queries executed increases linearly
+    with the number of entities.
+
+    To mitigate the N+1 problem, you can use techniques such as:
+    1. Eager fetching: Configure the relationship to use eager fetching so that
+       related entities are loaded in a single query.
+    2. Join fetching: Use JPQL or Criteria API to perform a join fetch, retrieving
+       both the parent and related entities in a single query.
+    3. Entity graphs: Use the @EntityGraph annotation to define which related
+       entities should be fetched together.
+    4. Batch fetching: Configure batch fetching settings in your JPA provider
+       to load related entities in batches rather than individually.

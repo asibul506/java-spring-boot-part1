@@ -2,6 +2,7 @@ package com.codewithfun.store.repositories;
 
 import com.codewithfun.store.entities.User;
 import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.time.LocalDateTime;
@@ -12,6 +13,11 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     @EntityGraph(attributePaths = {"addresses", "tags"}) // Eagerly fetch addresses and tags with user entity
     Optional<User> findByEmail(String email);
+
+    // Fetch all users with their addresses using a custom query to deal with N+1 problem
+    @EntityGraph(attributePaths = {"addresses"})
+    @Query("SELECT u FROM User u")
+    List<User> findAllWithAddresses();
 
     // below this line, add various method signatures for Spring Data JPA query generation. when uncommented,
     // these methods will be automatically implemented by Spring Data JPA based on their names.
