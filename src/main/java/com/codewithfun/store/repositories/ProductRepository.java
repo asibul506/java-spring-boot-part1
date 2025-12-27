@@ -6,6 +6,7 @@ import com.codewithfun.store.entities.Category;
 import com.codewithfun.store.entities.Product;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
@@ -22,9 +23,9 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     List<Product> findByPriceBetween(@Param("min") BigDecimal min, @Param("max") BigDecimal max);
 
 
-    // JPQL query - Java Persistence Query Language , an object-oriented query language used to query entities
-    @Query("select p from Product p join p.category where p.price between :min and :max order by p.name")
-    List<Product> findProducts(@Param("min") BigDecimal min, @Param("max") BigDecimal max);
+    // Call stored procedure from database
+    @Procedure("findProductsByPrice")
+    List<Product> findProducts(BigDecimal min, BigDecimal max);
 
     @Query("select count(*) from Product p where p.price between :min and :max")
     long countProducts(@Param("min") BigDecimal min, @Param("max") BigDecimal max);

@@ -367,3 +367,36 @@ N+1 problem:
        entities should be fetched together.
     4. Batch fetching: Configure batch fetching settings in your JPA provider
        to load related entities in batches rather than individually.
+
+
+
+Stored Procedures:
+    Stored procedures are precompiled SQL statements that are stored in the database
+    and can be executed by the database engine. They are used to encapsulate complex
+    business logic, improve performance, and enhance security by reducing the amount
+    of SQL code sent from the application to the database.
+
+    Here is an example of a stored procedure that retrieves products within a specified price range from a "products" table:
+
+    DELIMITER $$ -- Change the statement delimiter to $$ to allow for multi-line procedure definition. It allows the entire procedure to be defined as a single statement.
+
+    CREATE PROCEDURE findProductsByPrice(
+        minPrice DECIMAL(10, 2),
+        maxPrice DECIMAL(10, 2)
+    )
+    BEGIN
+    SELECT id, name, price, category_id
+    FROM products
+    WHERE price BETWEEN minPrice AND maxPrice
+    ORDER BY name;
+
+    END $$
+
+    DELIMITER ; -- Reset the statement delimiter back to the default ;
+
+    To check if the stored procedure is created successfully and works, you can use the following command:
+    CALL findProductsByPrice(10, 2000);
+
+    In your Spring Data JPA repository, you can call this stored procedure using the @Procedure annotation as follows:
+    @Procedure("findProductsByPrice")
+    List<Product> findProducts(BigDecimal min, BigDecimal max);

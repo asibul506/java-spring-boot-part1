@@ -134,14 +134,9 @@ public class UserService {
         System.out.println(product);
     }
 
+    @Transactional
     public void fetchProducts() {
-//        var category = Category.builder()
-//                .name("Food")
-//                .build();
-//        categoryRepository.save(category);
-
-        var category = categoryRepository.findById((byte)1).orElseThrow();
-        var products = productRepository.findByCategory(category);
+        var products = productRepository.findProducts(BigDecimal.valueOf(1000), BigDecimal.valueOf(2000));
         products.forEach(System.out::println);
     }
 
