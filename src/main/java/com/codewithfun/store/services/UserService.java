@@ -1,7 +1,6 @@
 package com.codewithfun.store.services;
 
 import com.codewithfun.store.entities.Address;
-import com.codewithfun.store.entities.Category;
 import com.codewithfun.store.entities.Product;
 import com.codewithfun.store.entities.User;
 import com.codewithfun.store.repositories.*;
@@ -149,6 +148,13 @@ public class UserService {
             u.getAddresses().forEach(System.out::println);
         });
 
+    }
+
+
+    @Transactional
+    public void exercise9_7(){
+        var users = userRepository.findLoyalUsers(2);
+        users.forEach(u-> System.out.println(u.getId() + "  " + u.getEmail()));
     }
 
 

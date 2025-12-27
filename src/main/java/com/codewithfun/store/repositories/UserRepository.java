@@ -1,9 +1,11 @@
 package com.codewithfun.store.repositories;
 
+import com.codewithfun.store.dtos.UserSummary;
 import com.codewithfun.store.entities.User;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,6 +20,10 @@ public interface UserRepository extends CrudRepository<User, Long> {
     @EntityGraph(attributePaths = {"addresses"})
     @Query("SELECT u FROM User u")
     List<User> findAllWithAddresses();
+
+
+    @Query("select u.id as id, u.email as email from User u where u.profile.loyaltyPoints > :loyaltyPoints order by u.email")
+    List<UserSummary> findLoyalUsers(@Param("loyaltyPoints") Integer loyaltyPoints);
 
     // below this line, add various method signatures for Spring Data JPA query generation. when uncommented,
     // these methods will be automatically implemented by Spring Data JPA based on their names.
